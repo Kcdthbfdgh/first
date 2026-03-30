@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,7 +18,7 @@ body {
 
 .hero {
     text-align: center;
-    padding: 80px 20px;
+    padding: 70px 20px;
 }
 
 .hero h1 {
@@ -41,21 +42,23 @@ body {
 
 .exercise {
     margin: 10px 0;
-    padding: 10px;
+    padding: 12px;
     border-radius: 10px;
     background: rgba(255,255,255,0.03);
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .exercise:hover {
-    background: rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.08);
 }
 
-.muscle {
+.details {
     display: none;
     margin-top: 8px;
-    color: #aaa;
     font-size: 14px;
+    color: #bbb;
+    line-height: 1.5;
 }
 
 .footer {
@@ -68,7 +71,6 @@ body {
 .note {
     color: #aaa;
     font-size: 14px;
-    margin-bottom: 10px;
 }
 </style>
 </head>
@@ -84,157 +86,241 @@ body {
 
 <!-- РАЗМИНКА -->
 <div class="block">
-    <h2>⚡ Всегда перед тренировкой</h2>
-
+    <h2>⚡ Разминка перед тренировкой</h2>
     <div class="note">
-        1. Суставная разминка — 5 минут<br>
-        2. Лёгкое кардио — 5–10 минут:
-        <br>• ходьба в горку (можно с гантелями)
-        <br>• бег в горку
-        <br>• степпер
-        <br>• скакалка
+        Суставная разминка — 5 минут + лёгкое кардио 5–10 минут.
     </div>
 </div>
 
 <!-- КРУГОВАЯ -->
 <div class="block">
-    <h2>🔥 Круговая (нестандартная выносливость)</h2>
-    <p>3–5 кругов</p>
+    <h2>🔥 Круговая тренировка</h2>
 
     <div class="exercise">Берпи с прыжком на платформу
-        <div class="muscle">Кардио + взрывная сила</div>
+        <div class="details">
+            <b>Назначение:</b> кардио + всё тело<br>
+            <b>Подходы:</b> 3–5 кругов по 12–15 повторений
+        </div>
     </div>
 
     <div class="exercise">Присед + жим гантелей вверх
-        <div class="muscle">Ноги + плечи</div>
+        <div class="details">
+            <b>Назначение:</b> ноги + плечи<br>
+            <b>Подходы:</b> 4×12–15
+        </div>
     </div>
 
     <div class="exercise">Русские скрутки с весом
-        <div class="muscle">Косые мышцы пресса</div>
+        <div class="details">
+            <b>Назначение:</b> косые мышцы пресса<br>
+            <b>Подходы:</b> 4×20
+        </div>
     </div>
 
     <div class="exercise">Планка с касанием плеч
-        <div class="muscle">Кора + стабилизация</div>
+        <div class="details">
+            <b>Назначение:</b> кор + стабилизация<br>
+            <b>Подходы:</b> 3×40–60 сек
+        </div>
     </div>
 
-    <div class="exercise">Стульчик у стены с весом
-        <div class="muscle">Квадрицепсы</div>
+    <div class="exercise">Стульчик у стены
+        <div class="details">
+            <b>Назначение:</b> квадрицепсы, выносливость<br>
+            <b>Подходы:</b> 3×60 сек
+        </div>
     </div>
 
-    <div class="exercise">Прыжки на тумбу (box jump)
-        <div class="muscle">Взрывная сила ног</div>
+    <div class="exercise">Прыжки на тумбу
+        <div class="details">
+            <b>Назначение:</b> взрывная сила ног<br>
+            <b>Подходы:</b> 4×10–12
+        </div>
     </div>
 
     <div class="exercise">Mountain climbers
-        <div class="muscle">Кардио + пресс</div>
+        <div class="details">
+            <b>Назначение:</b> пресс + кардио<br>
+            <b>Подходы:</b> 3×30–40 сек
+        </div>
     </div>
 
     <div class="exercise">Скакалка
-        <div class="muscle">Кардио + координация</div>
+        <div class="details">
+            <b>Назначение:</b> координация + выносливость<br>
+            <b>Подходы:</b> 3×1–2 мин
+        </div>
     </div>
 
     <div class="exercise">Планка с весом
-        <div class="muscle">Глубокий кор</div>
+        <div class="details">
+            <b>Назначение:</b> глубокие мышцы кора<br>
+            <b>Подходы:</b> 3×40–60 сек
+        </div>
     </div>
 
     <div class="exercise">Прыжки в выпадах
-        <div class="muscle">Ягодицы + баланс</div>
+        <div class="details">
+            <b>Назначение:</b> ягодицы + баланс<br>
+            <b>Подходы:</b> 3×12 на ногу
+        </div>
     </div>
 </div>
 
 <!-- НОГИ -->
 <div class="block">
-    <h2>🏋️ Ноги (силовая + форма ягодиц)</h2>
+    <h2>🏋️ Тренировка ног</h2>
 
-    <div class="exercise">Выпады назад с гантелями</div>
-    <div class="exercise">Приседания в Смите с паузой</div>
-    <div class="exercise">Ягодичный мостик с весом</div>
-    <div class="exercise">Болгарские выпады</div>
-    <div class="exercise">Жим платформы одной ногой</div>
-    <div class="exercise">Хип трест с удержанием</div>
-    <div class="exercise">Разведение ног в тренажере</div>
-    <div class="exercise">Зашагивания на тумбу с весом</div>
-    <div class="exercise">Румынская тяга</div>
+    <div class="exercise">Выпады назад с гантелями
+        <div class="details">
+            <b>Назначение:</b> ягодицы + квадрицепсы<br>
+            <b>Подходы:</b> 4×12–15
+        </div>
+    </div>
+
+    <div class="exercise">Приседания со штангой
+        <div class="details">
+            <b>Назначение:</b> базовая сила ног<br>
+            <b>Подходы:</b> 4×8–12
+        </div>
+    </div>
+
+    <div class="exercise">Ягодичный мостик
+        <div class="details">
+            <b>Назначение:</b> ягодицы<br>
+            <b>Подходы:</b> 4×12–15
+        </div>
+    </div>
+
+    <div class="exercise">Болгарские выпады
+        <div class="details">
+            <b>Назначение:</b> баланс + ягодицы<br>
+            <b>Подходы:</b> 4×10–12 на ногу
+        </div>
+    </div>
+
+    <div class="exercise">Жим платформы одной ногой
+        <div class="details">
+            <b>Назначение:</b> изолированная нагрузка<br>
+            <b>Подходы:</b> 4×12–15
+        </div>
+    </div>
+
+    <div class="exercise">Зашагивания на тумбу
+        <div class="details">
+            <b>Назначение:</b> ягодицы + координация<br>
+            <b>Подходы:</b> 4×12 на ногу
+        </div>
+    </div>
+
+    <div class="exercise">Румынская тяга
+        <div class="details">
+            <b>Назначение:</b> задняя поверхность бедра<br>
+            <b>Подходы:</b> 4×10–12
+        </div>
+    </div>
 </div>
 
 <!-- РУКИ -->
 <div class="block">
-    <h2>💪 Верх тела (нестандартные упражнения)</h2>
+    <h2>💪 Верх тела</h2>
 
-    <div class="exercise">Тяга верхнего блока</div>
-    <div class="exercise">Бабочка (сведение рук)</div>
-    <div class="exercise">Жим гантелей сидя</div>
-    <div class="exercise">Разведения гантелей в наклоне</div>
-    <div class="exercise">Сгибания на бицепс (разные углы)</div>
-    <div class="exercise">Французский жим</div>
-    <div class="exercise">Тяга каната на трицепс</div>
-    <div class="exercise">Тяга горизонтального блока</div>
-    <div class="exercise">Работа на предплечья</div>
-    <div class="exercise">Функциональные удержания веса</div>
-</div>
+    <div class="exercise">Тяга верхнего блока
+        <div class="details">
+            <b>Назначение:</b> широчайшие мышцы спины<br>
+            <b>Подходы:</b> 4×10–12
+        </div>
+    </div>
 
-<!-- ПРЕСС 1 -->
-<div class="block">
-    <h2>🔥 Пресс (10 упражнений)</h2>
+    <div class="exercise">Бабочка (сведение рук)
+        <div class="details">
+            <b>Назначение:</b> грудные мышцы<br>
+            <b>Подходы:</b> 4×12–15
+        </div>
+    </div>
 
-    <div class="exercise">Скручивания</div>
-    <div class="exercise">Подъем ног в висе</div>
-    <div class="exercise">Планка</div>
-    <div class="exercise">Русские скрутки</div>
-    <div class="exercise">Ножницы</div>
-    <div class="exercise">Велосипед</div>
-    <div class="exercise">Планка с касанием плеч</div>
-    <div class="exercise">Обратные скручивания</div>
-    <div class="exercise">Удержание ног</div>
-    <div class="exercise">Скручивания с весом</div>
-</div>
+    <div class="exercise">Жим гантелей вверх
+        <div class="details">
+            <b>Назначение:</b> плечи<br>
+            <b>Подходы:</b> 4×10–12
+        </div>
+    </div>
 
-<!-- ПРЕСС 2 -->
-<div class="block">
-    <h2>🔥 Пресс (12 упражнений)</h2>
+    <div class="exercise">Сгибания на бицепс
+        <div class="details">
+            <b>Назначение:</b> бицепс<br>
+            <b>Подходы:</b> 4×10–12
+        </div>
+    </div>
 
-    <div class="exercise">Подъем ног лежа</div>
-    <div class="exercise">Скручивания на наклонной скамье</div>
-    <div class="exercise">Планка с весом</div>
-    <div class="exercise">Русские скрутки с мячом</div>
-    <div class="exercise">Ножницы</div>
-    <div class="exercise">Велосипед</div>
-    <div class="exercise">Mountain climbers</div>
-    <div class="exercise">Касание пяток</div>
-    <div class="exercise">Обратные скручивания</div>
-    <div class="exercise">Планка боковая</div>
-    <div class="exercise">Скручивания с удержанием</div>
-    <div class="exercise">Dead bug</div>
+    <div class="exercise">Французский жим
+        <div class="details">
+            <b>Назначение:</b> трицепс<br>
+            <b>Подходы:</b> 4×10–12
+        </div>
+    </div>
+
+    <div class="exercise">Работа на предплечья
+        <div class="details">
+            <b>Назначение:</b> сила хвата<br>
+            <b>Подходы:</b> 3×15–20
+        </div>
+    </div>
 </div>
 
 <!-- FULL BODY -->
 <div class="block">
-    <h2>⚡ Full Body (продвинутая)</h2>
+    <h2>⚡ Full Body</h2>
 
-    <div class="exercise">Тяга верхнего блока</div>
-    <div class="exercise">Бабочка (грудь)</div>
-    <div class="exercise">Присед с отягощением на степперах</div>
-    <div class="exercise">Зашагивания на тумбу</div>
-    <div class="exercise">Жим гантелей вверх</div>
-    <div class="exercise">Тяга гантели в наклоне</div>
-    <div class="exercise">Работа на предплечья</div>
-    <div class="exercise">Планка</div>
-    <div class="exercise">Выпады</div>
-    <div class="exercise">Берпи</div>
+    <div class="exercise">Тяга верхнего блока
+        <div class="details">4×10–12</div>
+    </div>
+
+    <div class="exercise">Бабочка
+        <div class="details">4×12–15</div>
+    </div>
+
+    <div class="exercise">Присед с весом на степперах
+        <div class="details">4×12</div>
+    </div>
+
+    <div class="exercise">Зашагивания на тумбу
+        <div class="details">4×12 на ногу</div>
+    </div>
+
+    <div class="exercise">Жим гантелей вверх
+        <div class="details">4×10–12</div>
+    </div>
+
+    <div class="exercise">Тяга гантели в наклоне
+        <div class="details">4×10–12</div>
+    </div>
+
+    <div class="exercise">Планка
+        <div class="details">3×60 сек</div>
+    </div>
+
+    <div class="exercise">Выпады
+        <div class="details">4×12 на ногу</div>
+    </div>
+
+    <div class="exercise">Берпи
+        <div class="details">3×12–15</div>
+    </div>
 </div>
 
 </div>
 
 <div class="footer">
-    Авторская фитнес-система Валерии Зайцевой
+    Авторская система Валерии Зайцевой
 </div>
 
 <script>
 document.querySelectorAll('.exercise').forEach(el=>{
     el.addEventListener('click', ()=>{
-        let muscle = el.querySelector('.muscle');
-        if(muscle){
-            muscle.style.display = muscle.style.display === 'block' ? 'none' : 'block';
+        let details = el.querySelector('.details');
+        if(details){
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
         }
     });
 });
