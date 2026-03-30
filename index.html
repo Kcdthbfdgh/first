@@ -96,7 +96,20 @@ button:hover {
 
 <!-- APP -->
 <div id="appScreen" class="screen">
-    <div class="card">
+    <div id="homeTab" class="tab">
+    <h2>Главная</h2>
+    <p>Твоя персональная программа</p>
+</div>
+
+<div id="workoutsTab" class="tab" style="display:none;">
+    <h2>Тренировки недели</h2>
+    <div id="workoutsList"></div>
+</div>
+
+<div id="progressTab" class="tab" style="display:none;">
+    <h2>Прогресс</h2>
+    <p id="progressStats"></p>
+</div>    <div class="card">
     <strong>Прогресс</strong>
     <p id="progressText">0% выполнено</p>
     <button onclick="resetProgress()">Сбросить день</button>
@@ -115,6 +128,7 @@ button:hover {
         <label><input type="checkbox" onchange="updateProgress()"> Планка</label><br>
         <label><input type="checkbox" onchange="updateProgress()"> Стульчик</label><br>
     </div>
+        
 </div>
     <div class="card" onclick="toggleDetails(this)">
         <strong>Силовая тренировка ног</strong>
@@ -126,10 +140,105 @@ button:hover {
             <p>5. Болгарские выпады</p>
         </div>
     </div>
-
+    <div id="nav" style="position:fixed; bottom:0; left:0; right:0; background:#111; display:flex; justify-content:space-around; padding:10px;">
+    <button onclick="showTab('home')">🏠</button>
+    <button onclick="showTab('workouts')">💪</button>
+    <button onclick="showTab('progress')">📊</button>
+</div>
 </div>
 
 <script>
+    const weeklyProgram = [
+{
+    day: "Понедельник",
+    type: "Круговая",
+    exercises: [
+        "Берпи",
+        "Приседания с выпрыгиванием",
+        "Пресс книжка",
+        "Планка 1 мин",
+        "Стульчик",
+        "Альпинист",
+        "Прыжки на месте",
+        "Скручивания",
+        "Отжимания",
+        "Jumping jacks"
+    ]
+},
+{
+    day: "Вторник",
+    type: "Ноги",
+    exercises: [
+        "Выпады в смите",
+        "Приседания",
+        "Ягодичный мост",
+        "Болгарские выпады",
+        "Жим ногами",
+        "Разгибание ног",
+        "Сгибание ног",
+        "Отведение ноги",
+        "Гиперэкстензия",
+        "Пульсации в приседе"
+    ]
+},
+{
+    day: "Среда",
+    type: "Пресс",
+    exercises: [
+        "Скручивания",
+        "Подъем ног",
+        "Планка",
+        "Русский твист",
+        "V-ups",
+        "Альпинист",
+        "Обратные скручивания",
+        "Ножницы",
+        "Боковая планка",
+        "Планка с касанием плеч"
+    ]
+},
+{
+    day: "Четверг",
+    type: "Руки",
+    exercises: [
+        "Отжимания",
+        "Тяга гантелей",
+        "Подъем гантелей на бицепс",
+        "Французский жим",
+        "Разведение гантелей",
+        "Тяга верхнего блока",
+        "Молотки",
+        "Отжимания узкие",
+        "Разгибание рук",
+        "Планка с касанием"
+    ]
+},
+{
+    day: "Пятница",
+    type: "Смешанная",
+    exercises: [
+        "Берпи",
+        "Приседания",
+        "Отжимания",
+        "Прыжки",
+        "Планка",
+        "Скручивания",
+        "Выпады",
+        "Альпинист",
+        "Jump squat",
+        "Mountain climbers"
+    ]
+}
+];function showTab(tab){
+
+    document.getElementById("homeTab").style.display = "none";
+    document.getElementById("workoutsTab").style.display = "none";
+    document.getElementById("progressTab").style.display = "none";
+
+    if(tab === "home") document.getElementById("homeTab").style.display = "block";
+    if(tab === "workouts") document.getElementById("workoutsTab").style.display = "block";
+    if(tab === "progress") document.getElementById("progressTab").style.display = "block";
+}
 let userLevel = null;
 let userGoal = null;
 
@@ -159,9 +268,47 @@ function toggleDetails(card){
     let details = card.querySelector(".details");
     details.style.display = details.style.display === "block" ? "none" : "block";
 }
+function renderWorkouts(){
 
-/* AUTO LOAD */
-window.onload = () => {
+    let container = document.getElementById("workoutsList");
+    container.innerHTML = "";
+
+    weeklyProgram.forEach(day => {
+
+        let div = document.createElement("div");
+        div.className = "card";
+
+        let html = `<strong>${day.day} (${day.type})</strong><div class="details" style="display:block;">`;
+
+        day.exercises.forEach(ex => {
+            html += `<label><input type="checkbox"> ${ex}</label><br>`;
+        });
+
+        html += "</div>";
+
+        div.innerHTML = html;
+        container.appendChild(div);
+    });
+}
+
+window.addEventListener("load", renderWorkouts);
+    /* AUTO LOAD */
+function updateProgressStats(){
+    let checkboxes = document.querySelectorAll("#workoutsList input[type='checkbox']");
+    let total = checkboxes.length;
+    let done = 0;
+
+    checkboxes.forEach(cb => {
+        if(cb.checked) done++;
+    });
+
+    let percent = total ? Math.round((done/total)*100) : 0;
+
+    document.getElementById("progressStats").innerText =
+        "Выполнено: " + percent + "% (" + done + "/" + total + ")";
+}
+    document.addEventListener("change", updateProgressStats);
+    .onload = () => {
     let savedLevel = localStorage.getItem("level");
     let savedGoal = localStorage.getItem("goal");
 
