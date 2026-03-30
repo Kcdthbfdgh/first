@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitness Guide Pro</title>
+<title>Fitness App</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -12,66 +12,100 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: #0b0b0b;
+    background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
     color: #fff;
 }
 
-.hero {
-    text-align: center;
-    padding: 70px 20px;
+/* NAV */
+.nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
 }
 
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
+.nav button {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-.container {
+.nav button.active {
+    color: #fff;
+}
+
+/* SECTIONS */
+.section {
+    display: none;
+    padding: 80px 20px 100px;
     max-width: 900px;
     margin: auto;
-    padding: 20px;
+    animation: fadeIn 0.4s ease;
 }
 
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(15px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* BLOCK */
 .block {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
     border-radius: 14px;
     padding: 20px;
     margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
+/* EXERCISE */
 .exercise {
-    margin: 10px 0;
     padding: 12px;
-    border-radius: 10px;
+    margin-top: 10px;
     background: rgba(255,255,255,0.03);
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.2s;
 }
 
 .exercise:hover {
+    transform: scale(1.02);
     background: rgba(255,255,255,0.08);
 }
 
 .details {
     display: none;
     margin-top: 8px;
-    font-size: 14px;
-    color: #bbb;
-    line-height: 1.5;
-}
-
-.footer {
-    text-align: center;
-    padding: 40px;
-    color: #666;
     font-size: 13px;
+    color: #bbb;
 }
 
-.note {
-    color: #aaa;
-    font-size: 14px;
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 60px 20px 20px;
 }
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+}
+
+/* CHECKBOX */
+.done {
+    margin-top: 8px;
+}
+
 </style>
 </head>
 
@@ -79,251 +113,164 @@ body {
 
 <div class="hero">
     <h1>Фитнес-система Валерии Зайцевой</h1>
-    <p>Мастер спорта • восстановление • сила • эстетика тела</p>
+    <p>Мастер спорта • восстановление • сила • эстетика</p>
 </div>
 
-<div class="container">
-
-<!-- РАЗМИНКА -->
-<div class="block">
-    <h2>⚡ Разминка перед тренировкой</h2>
-    <div class="note">
-        Суставная разминка — 5 минут + лёгкое кардио 5–10 минут.
-    </div>
-</div>
-
-<!-- КРУГОВАЯ -->
-<div class="block">
-    <h2>🔥 Круговая тренировка</h2>
-
-    <div class="exercise">Берпи с прыжком на платформу
-        <div class="details">
-            <b>Назначение:</b> кардио + всё тело<br>
-            <b>Подходы:</b> 3–5 кругов по 12–15 повторений
-        </div>
-    </div>
-
-    <div class="exercise">Присед + жим гантелей вверх
-        <div class="details">
-            <b>Назначение:</b> ноги + плечи<br>
-            <b>Подходы:</b> 4×12–15
-        </div>
-    </div>
-
-    <div class="exercise">Русские скрутки с весом
-        <div class="details">
-            <b>Назначение:</b> косые мышцы пресса<br>
-            <b>Подходы:</b> 4×20
-        </div>
-    </div>
-
-    <div class="exercise">Планка с касанием плеч
-        <div class="details">
-            <b>Назначение:</b> кор + стабилизация<br>
-            <b>Подходы:</b> 3×40–60 сек
-        </div>
-    </div>
-
-    <div class="exercise">Стульчик у стены
-        <div class="details">
-            <b>Назначение:</b> квадрицепсы, выносливость<br>
-            <b>Подходы:</b> 3×60 сек
-        </div>
-    </div>
-
-    <div class="exercise">Прыжки на тумбу
-        <div class="details">
-            <b>Назначение:</b> взрывная сила ног<br>
-            <b>Подходы:</b> 4×10–12
-        </div>
-    </div>
-
-    <div class="exercise">Mountain climbers
-        <div class="details">
-            <b>Назначение:</b> пресс + кардио<br>
-            <b>Подходы:</b> 3×30–40 сек
-        </div>
-    </div>
-
-    <div class="exercise">Скакалка
-        <div class="details">
-            <b>Назначение:</b> координация + выносливость<br>
-            <b>Подходы:</b> 3×1–2 мин
-        </div>
-    </div>
-
-    <div class="exercise">Планка с весом
-        <div class="details">
-            <b>Назначение:</b> глубокие мышцы кора<br>
-            <b>Подходы:</b> 3×40–60 сек
-        </div>
-    </div>
-
-    <div class="exercise">Прыжки в выпадах
-        <div class="details">
-            <b>Назначение:</b> ягодицы + баланс<br>
-            <b>Подходы:</b> 3×12 на ногу
-        </div>
+<!-- HOME -->
+<div id="home" class="section active">
+    <div class="block">
+        <h2>Добро пожаловать</h2>
+        <p>Выбери раздел внизу, чтобы начать тренировку.</p>
     </div>
 </div>
 
-<!-- НОГИ -->
-<div class="block">
-    <h2>🏋️ Тренировка ног</h2>
+<!-- TRAININGS -->
+<div id="trainings" class="section">
 
-    <div class="exercise">Выпады назад с гантелями
-        <div class="details">
-            <b>Назначение:</b> ягодицы + квадрицепсы<br>
-            <b>Подходы:</b> 4×12–15
+    <div class="block">
+        <h2>🔥 Круговая тренировка</h2>
+
+        <div class="exercise">Берпи
+            <div class="details">
+                4 подхода × 15 повторений
+                <div class="done"><input type="checkbox"> Выполнено</div>
+            </div>
         </div>
+
+        <div class="exercise">Присед + жим
+            <div class="details">4×12–15</div>
+        </div>
+
+        <div class="exercise">Планка
+            <div class="details">3×60 сек</div>
+        </div>
+
     </div>
 
-    <div class="exercise">Приседания со штангой
-        <div class="details">
-            <b>Назначение:</b> базовая сила ног<br>
-            <b>Подходы:</b> 4×8–12
+    <div class="block">
+        <h2>🏋️ Ноги</h2>
+
+        <div class="exercise">Приседания
+            <div class="details">4×10–12</div>
         </div>
+
+        <div class="exercise">Ягодичный мост
+            <div class="details">4×12–15</div>
+        </div>
+
+        <div class="exercise">Болгарские выпады
+            <div class="details">4×10 на ногу</div>
+        </div>
+
+        <div class="exercise">Румынская тяга
+            <div class="details">4×10–12</div>
+        </div>
+
     </div>
 
-    <div class="exercise">Ягодичный мостик
-        <div class="details">
-            <b>Назначение:</b> ягодицы<br>
-            <b>Подходы:</b> 4×12–15
+    <div class="block">
+        <h2>💪 Верх тела</h2>
+
+        <div class="exercise">Тяга верхнего блока
+            <div class="details">4×10–12</div>
         </div>
+
+        <div class="exercise">Бабочка
+            <div class="details">4×12–15</div>
+        </div>
+
+        <div class="exercise">Жим гантелей
+            <div class="details">4×10–12</div>
+        </div>
+
     </div>
 
-    <div class="exercise">Болгарские выпады
-        <div class="details">
-            <b>Назначение:</b> баланс + ягодицы<br>
-            <b>Подходы:</b> 4×10–12 на ногу
-        </div>
-    </div>
-
-    <div class="exercise">Жим платформы одной ногой
-        <div class="details">
-            <b>Назначение:</b> изолированная нагрузка<br>
-            <b>Подходы:</b> 4×12–15
-        </div>
-    </div>
-
-    <div class="exercise">Зашагивания на тумбу
-        <div class="details">
-            <b>Назначение:</b> ягодицы + координация<br>
-            <b>Подходы:</b> 4×12 на ногу
-        </div>
-    </div>
-
-    <div class="exercise">Румынская тяга
-        <div class="details">
-            <b>Назначение:</b> задняя поверхность бедра<br>
-            <b>Подходы:</b> 4×10–12
-        </div>
-    </div>
 </div>
 
-<!-- РУКИ -->
-<div class="block">
-    <h2>💪 Верх тела</h2>
+<!-- ABS -->
+<div id="abs" class="section">
 
-    <div class="exercise">Тяга верхнего блока
-        <div class="details">
-            <b>Назначение:</b> широчайшие мышцы спины<br>
-            <b>Подходы:</b> 4×10–12
+    <div class="block">
+        <h2>🔥 Пресс</h2>
+
+        <div class="exercise">Скручивания
+            <div class="details">4×15</div>
         </div>
+
+        <div class="exercise">Подъем ног
+            <div class="details">4×15</div>
+        </div>
+
+        <div class="exercise">Велосипед
+            <div class="details">4×20</div>
+        </div>
+
+        <div class="exercise">Планка
+            <div class="details">3×60 сек</div>
+        </div>
+
     </div>
 
-    <div class="exercise">Бабочка (сведение рук)
-        <div class="details">
-            <b>Назначение:</b> грудные мышцы<br>
-            <b>Подходы:</b> 4×12–15
-        </div>
-    </div>
-
-    <div class="exercise">Жим гантелей вверх
-        <div class="details">
-            <b>Назначение:</b> плечи<br>
-            <b>Подходы:</b> 4×10–12
-        </div>
-    </div>
-
-    <div class="exercise">Сгибания на бицепс
-        <div class="details">
-            <b>Назначение:</b> бицепс<br>
-            <b>Подходы:</b> 4×10–12
-        </div>
-    </div>
-
-    <div class="exercise">Французский жим
-        <div class="details">
-            <b>Назначение:</b> трицепс<br>
-            <b>Подходы:</b> 4×10–12
-        </div>
-    </div>
-
-    <div class="exercise">Работа на предплечья
-        <div class="details">
-            <b>Назначение:</b> сила хвата<br>
-            <b>Подходы:</b> 3×15–20
-        </div>
-    </div>
 </div>
 
 <!-- FULL BODY -->
-<div class="block">
-    <h2>⚡ Full Body</h2>
+<div id="full" class="section">
 
-    <div class="exercise">Тяга верхнего блока
-        <div class="details">4×10–12</div>
-    </div>
+    <div class="block">
+        <h2>⚡ Full Body</h2>
 
-    <div class="exercise">Бабочка
-        <div class="details">4×12–15</div>
-    </div>
+        <div class="exercise">Тяга блока
+            <div class="details">4×12</div>
+        </div>
 
-    <div class="exercise">Присед с весом на степперах
-        <div class="details">4×12</div>
-    </div>
+        <div class="exercise">Присед
+            <div class="details">4×12</div>
+        </div>
 
-    <div class="exercise">Зашагивания на тумбу
-        <div class="details">4×12 на ногу</div>
-    </div>
+        <div class="exercise">Жим гантелей
+            <div class="details">4×10</div>
+        </div>
 
-    <div class="exercise">Жим гантелей вверх
-        <div class="details">4×10–12</div>
-    </div>
+        <div class="exercise">Выпады
+            <div class="details">4×12</div>
+        </div>
 
-    <div class="exercise">Тяга гантели в наклоне
-        <div class="details">4×10–12</div>
-    </div>
+        <div class="exercise">Берпи
+            <div class="details">3×15</div>
+        </div>
 
-    <div class="exercise">Планка
-        <div class="details">3×60 сек</div>
     </div>
-
-    <div class="exercise">Выпады
-        <div class="details">4×12 на ногу</div>
-    </div>
-
-    <div class="exercise">Берпи
-        <div class="details">3×12–15</div>
-    </div>
-</div>
 
 </div>
 
-<div class="footer">
-    Авторская система Валерии Зайцевой
+<!-- NAV -->
+<div class="nav">
+    <button onclick="showSection('home')" class="active">Главная</button>
+    <button onclick="showSection('trainings')">Тренировки</button>
+    <button onclick="showSection('abs')">Пресс</button>
+    <button onclick="showSection('full')">Full Body</button>
 </div>
 
 <script>
+
+// navigation
+function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+}
+
+// toggle exercises
 document.querySelectorAll('.exercise').forEach(el=>{
     el.addEventListener('click', ()=>{
-        let details = el.querySelector('.details');
-        if(details){
-            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+        let d = el.querySelector('.details');
+        if(d){
+            d.style.display = d.style.display === 'block' ? 'none' : 'block';
         }
     });
 });
+
 </script>
 
 </body>
