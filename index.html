@@ -1,279 +1,386 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitness Premium App</title>
+<title>Luxury Fitness System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #0a0a0a;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
     color: #fff;
 }
 
-/* Screens */
-.screen {
-    display: none;
+.hero {
+    text-align: center;
+    padding: 90px 20px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    color: #aaa;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
     padding: 20px;
-    animation: fadeIn 0.4s ease;
-}
-.active { display: block; }
-
-/* Animation */
-@keyframes fadeIn {
-    from {opacity:0; transform:translateY(20px);}
-    to {opacity:1; transform:translateY(0);}
 }
 
-/* Cards */
-.card {
-    background: rgba(255,255,255,0.05);
-    border-radius: 16px;
-    padding: 16px;
-    margin: 12px 0;
+.block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 25px;
     backdrop-filter: blur(10px);
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+.exercise {
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
     transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-4px);
+.exercise:hover {
     background: rgba(255,255,255,0.08);
 }
 
-/* Buttons */
-button {
-    width: 100%;
-    margin: 8px 0;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-/* Details */
 .details {
     display: none;
-    margin-top: 10px;
+    margin-top: 8px;
     font-size: 14px;
-    opacity: 0.85;
+    color: #bbb;
+    line-height: 1.4;
 }
 
-/* Nav */
-.nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-around;
-    background: rgba(0,0,0,0.85);
-    padding: 10px;
-    backdrop-filter: blur(10px);
-}
-
-.nav button {
-    width: auto;
-    background: transparent;
-    font-size: 18px;
-}
-
-/* Premium badge */
-.badge {
+.tag {
     font-size: 12px;
-    opacity: 0.7;
+    color: #888;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 13px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ONBOARDING -->
-<div id="onboarding" class="screen active">
-    <h2>Выбери уровень</h2>
-    <button onclick="setLevel('beginner')">Начальный</button>
-    <button onclick="setLevel('intermediate')">Средний</button>
-    <button onclick="setLevel('advanced')">Продвинутый</button>
+<div class="hero">
+    <h1>Luxury Fitness System</h1>
+    <p>Сила • эстетика • контроль • функциональность</p>
 </div>
 
-<!-- APP -->
-<div id="app" class="screen">
+<div class="container">
 
-    <div class="card">
-        <h3>Твоя программа</h3>
-        <p id="userInfo"></p>
-        <span class="badge">Premium Fitness System</span>
-    </div>
+<!-- РАЗМИНКА -->
+<div class="block">
+<h2>⚡ Обязательная разминка</h2>
 
-    <div id="workouts"></div>
+<div class="exercise">
+Суставная разминка (5 мин)
+<div class="details">
+Подготовка суставов (шея, плечи, таз, колени, голеностоп).<br>
+Совет: движения плавные, без рывков.
+</div>
+</div>
+
+<div class="exercise">
+Лёгкое кардио (5–10 мин)
+<div class="details">
+Варианты: ходьба в горку, степпер, скакалка, лёгкий бег.<br>
+Совет: держать пульс в зоне разогрева, не выматываться.
+</div>
+</div>
 
 </div>
 
-<!-- NAV -->
-<div class="nav">
-    <button onclick="showWorkouts()">🏠</button>
-    <button onclick="alert('Premium feature: progress tracking')">📊</button>
-    <button onclick="alert('Premium feature: profile')">👤</button>
+<!-- ТРЕНИРОВКА 1 -->
+<div class="block">
+<h2>🔥 Тренировка 1 — Full Body Functional (Уровень: средний)</h2>
+
+<div class="exercise">Присед с гирей на платформе
+<div class="details">3×12 — ягодицы, квадрицепсы. Следить за коленями.</div></div>
+
+<div class="exercise">Тяга верхнего блока
+<div class="details">3×10 — спина. Лопатки сводить.</div></div>
+
+<div class="exercise">Бабочка (сведение рук)
+<div class="details">3×12 — грудь. Контроль амплитуды.</div></div>
+
+<div class="exercise">Жим гантелей вверх сидя
+<div class="details">3×10 — плечи. Не прогибать поясницу.</div></div>
+
+<div class="exercise">Тяга гантели в наклоне
+<div class="details">3×10 — широчайшие. Спина ровная.</div></div>
+
+<div class="exercise">Захождение на тумбу
+<div class="details">3×12 — ноги, баланс. Давить пяткой.</div></div>
+
+<div class="exercise">Планка с касанием плеч
+<div class="details">3×30 сек — кора. Минимизировать раскачку.</div></div>
+
+<div class="exercise">Сгибание рук с гантелями
+<div class="details">3×12 — бицепс. Без читинга.</div></div>
+
+<div class="exercise">Разгибание рук на блоке
+<div class="details">3×12 — трицепс. Локти фиксированы.</div></div>
+
+<div class="exercise">Подъём коленей в висе
+<div class="details">3×15 — пресс. Контроль движения.</div></div>
+
+<div class="exercise">Фермерская прогулка
+<div class="details">3×40 сек — хват, корпус. Спина ровная.</div></div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 2 -->
+<div class="block">
+<h2>🔥 Тренировка 2 — Lower Body Advanced</h2>
+
+<div class="exercise">Болгарские выпады
+<div class="details">4×12 — ягодицы, баланс.</div></div>
+
+<div class="exercise">Ягодичный мост с паузой
+<div class="details">4×15 — ягодицы. Пауза вверху 2 сек.</div></div>
+
+<div class="exercise">Присед с узкой постановкой
+<div class="details">4×12 — квадрицепсы.</div></div>
+
+<div class="exercise">Румынская тяга
+<div class="details">4×10 — задняя поверхность бедра.</div></div>
+
+<div class="exercise">Жим платформы одной ногой
+<div class="details">3×12 — контроль амплитуды.</div></div>
+
+<div class="exercise">Шаги на тумбу с весом
+<div class="details">3×12 — ягодицы. Медленный темп.</div></div>
+
+<div class="exercise">Отведение ноги в кроссовере
+<div class="details">3×15 — средняя ягодичная.</div></div>
+
+<div class="exercise">Сумо-присед с гирей
+<div class="details">3×15 — внутренняя поверхность бедра.</div></div>
+
+<div class="exercise">Стульчик у стены с весом
+<div class="details">3×60 сек — выносливость.</div></div>
+
+<div class="exercise">Прыжки из приседа
+<div class="details">3×12 — взрывная сила.</div></div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 3 -->
+<div class="block">
+<h2>🔥 Тренировка 3 — Upper Body Strength</h2>
+
+<div class="exercise">Подтягивания / гравитрон
+<div class="details">4×8 — спина.</div></div>
+
+<div class="exercise">Жим штанги лёжа
+<div class="details">4×8 — грудь.</div></div>
+
+<div class="exercise">Тяга горизонтального блока
+<div class="details">3×10 — ромбовидные.</div></div>
+
+<div class="exercise">Разведения гантелей в стороны
+<div class="details">3×12 — плечи.</div></div>
+
+<div class="exercise">Face pull
+<div class="details">3×15 — задняя дельта.</div></div>
+
+<div class="exercise">Сгибания на бицепс EZ
+<div class="details">3×12 — контроль локтей.</div></div>
+
+<div class="exercise">Французский жим
+<div class="details">3×12 — трицепс.</div></div>
+
+<div class="exercise">Пуловер с гантелью
+<div class="details">3×12 — грудь + спина.</div></div>
+
+<div class="exercise">Отжимания на брусьях
+<div class="details">3×макс — грудь/трицепс.</div></div>
+
+<div class="exercise">Планка с весом
+<div class="details">3×40 сек — кора.</div></div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 4 -->
+<div class="block">
+<h2>🔥 Тренировка 4 — Abs Core (10 упражнений)</h2>
+
+<div class="exercise">Скручивания
+<div class="details">3×20 — верх пресса.</div></div>
+
+<div class="exercise">Подъём ног лёжа
+<div class="details">3×15 — низ пресса.</div></div>
+
+<div class="exercise">Русские скрутки
+<div class="details">3×20 — косые.</div></div>
+
+<div class="exercise">Велосипед
+<div class="details">3×20 — координация.</div></div>
+
+<div class="exercise">Планка
+<div class="details">3×60 сек — стабилизация.</div></div>
+
+<div class="exercise">Планка боковая
+<div class="details">3×30 сек — косые.</div></div>
+
+<div class="exercise">Ножницы
+<div class="details">3×20 — нижний пресс.</div></div>
+
+<div class="exercise">Скручивания с паузой
+<div class="details">3×15 — контроль.</div></div>
+
+<div class="exercise">Mountain climbers
+<div class="details">3×30 сек — кардио + пресс.</div></div>
+
+<div class="exercise">Dead bug
+<div class="details">3×15 — глубокий кор.</div></div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 5 -->
+<div class="block">
+<h2>🔥 Тренировка 5 — Abs Advanced (12 упражнений)</h2>
+
+<div class="exercise">Подъём ног в висе</div>
+<div class="exercise">Toe touches</div>
+<div class="exercise">Hollow body hold</div>
+<div class="exercise">Обратные скручивания</div>
+<div class="exercise">Планка с касанием плеч</div>
+<div class="exercise">Russian twist с весом</div>
+<div class="exercise">Велосипед медленный</div>
+<div class="exercise">Flutter kicks</div>
+<div class="exercise">Rollout (колесо)</div>
+<div class="exercise">Side plank dips</div>
+<div class="exercise">Mountain climbers</div>
+<div class="exercise">L-sit удержание</div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 6 -->
+<div class="block">
+<h2>⚡ Тренировка 6 — Mixed Functional</h2>
+
+<div class="exercise">Присед + жим гири</div>
+<div class="exercise">Берпи с прыжком</div>
+<div class="exercise">Тяга блока</div>
+<div class="exercise">Отжимания</div>
+<div class="exercise">Тумба + выпрыгивание</div>
+<div class="exercise">Фермерская прогулка</div>
+<div class="exercise">Планка динамическая</div>
+<div class="exercise">Тяга гантелей</div>
+<div class="exercise">Сумо с гирей</div>
+<div class="exercise">Скручивания</div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 7 -->
+<div class="block">
+<h2>⚡ Тренировка 7 — Stability & Balance</h2>
+
+<div class="exercise">Присед на одной ноге (ассист)</div>
+<div class="exercise">Баланс на платформе</div>
+<div class="exercise">Step-up медленный</div>
+<div class="exercise">Планка нестабильная</div>
+<div class="exercise">Тяга одной рукой</div>
+<div class="exercise">Жим стоя</div>
+<div class="exercise">Румынская тяга одной ногой</div>
+<div class="exercise">Фермерская прогулка</div>
+<div class="exercise">Dead bug</div>
+<div class="exercise">Hollow hold</div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 8 -->
+<div class="block">
+<h2>⚡ Тренировка 8 — Upper Sculpt</h2>
+
+<div class="exercise">Жим гантелей под углом</div>
+<div class="exercise">Тяга верхнего блока</div>
+<div class="exercise">Разведения на заднюю дельту</div>
+<div class="exercise">Бабочка</div>
+<div class="exercise">Подъём гантелей в стороны</div>
+<div class="exercise">Сгибание рук</div>
+<div class="exercise">Французский жим</div>
+<div class="exercise">Face pull</div>
+<div class="exercise">Отжимания узкие</div>
+<div class="exercise">Планка</div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 9 -->
+<div class="block">
+<h2>⚡ Тренировка 9 — Endurance Cardio Strength</h2>
+
+<div class="exercise">Берпи</div>
+<div class="exercise">Прыжки на тумбу</div>
+<div class="exercise">Скакалка</div>
+<div class="exercise">Mountain climbers</div>
+<div class="exercise">Присед прыжковый</div>
+<div class="exercise">Step-up быстрый</div>
+<div class="exercise">Планка</div>
+<div class="exercise">Бег на месте</div>
+<div class="exercise">Альпинист</div>
+<div class="exercise">Выпады прыжковые</div>
+
+</div>
+
+<!-- ТРЕНИРОВКА 10 -->
+<div class="block">
+<h2>⚡ Тренировка 10 — Power Full Body</h2>
+
+<div class="exercise">Присед с гирей</div>
+<div class="exercise">Тяга верхнего блока</div>
+<div class="exercise">Жим штанги</div>
+<div class="exercise">Тумба step-up</div>
+<div class="exercise">Фермерская прогулка</div>
+<div class="exercise">Сумо тяга</div>
+<div class="exercise">Бабочка</div>
+<div class="exercise">Подтягивания</div>
+<div class="exercise">Планка с весом</div>
+<div class="exercise">Берпи</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Luxury Fitness System ©
 </div>
 
 <script>
-
-/* USER DATA */
-let userLevel = null;
-
-/* LEVEL */
-function setLevel(level){
-    userLevel = level;
-    localStorage.setItem("level", level);
-
-    document.getElementById("onboarding").classList.remove("active");
-    document.getElementById("app").classList.add("active");
-
-    document.getElementById("userInfo").innerText =
-        "Уровень: " + level;
-
-    renderWorkouts();
-}
-
-/* WORKOUT DATA */
-const workouts = [
-{
-    title: "Круговая тренировка",
-    premium: false,
-    exercises: [
-        {name:"Берпи", desc:"Сначала присед → прыжок → упор лёжа → отжимание → возврат", muscle:"Кардио, всё тело"},
-        {name:"Приседания с прыжком", desc:"Присед + взрывной прыжок вверх", muscle:"Ноги, ягодицы"},
-        {name:"Пресс книжка", desc:"Подъём корпуса и ног одновременно", muscle:"Пресс"},
-        {name:"Планка", desc:"Держи корпус ровно, без прогиба", muscle:"Кор"},
-        {name:"Стульчик", desc:"Статическое удержание у стены", muscle:"Квадрицепсы"},
-        {name:"Альпинист", desc:"Поочерёдное подтягивание коленей в планке", muscle:"Пресс"},
-        {name:"Jumping jacks", desc:"Прыжки с разведением рук и ног", muscle:"Кардио"},
-        {name:"Скручивания", desc:"Подъём плеч к тазу", muscle:"Пресс"},
-        {name:"Отжимания", desc:"Опускание корпуса до угла 90°", muscle:"Грудь"},
-        {name:"Бег на месте", desc:"Активный бег с высоким темпом", muscle:"Кардио"}
-    ]
-},
-{
-    title: "Ноги",
-    premium: true,
-    exercises: [
-        {name:"Приседания", desc:"Спина прямая, колени не выходят за носки", muscle:"Ноги"},
-        {name:"Выпады", desc:"Шаг вперёд и опускание корпуса", muscle:"Ягодицы"},
-        {name:"Жим ногами", desc:"Толчок платформы ногами", muscle:"Ноги"},
-        {name:"Ягодичный мост", desc:"Подъём таза вверх", muscle:"Ягодицы"},
-        {name:"Болгарские выпады", desc:"Задняя нога на возвышении", muscle:"Ягодицы"},
-        {name:"Разгибание ног", desc:"Работа квадрицепса", muscle:"Квадрицепсы"},
-        {name:"Сгибание ног", desc:"Работа задней поверхности бедра", muscle:"Бицепс бедра"},
-        {name:"Гиперэкстензия", desc:"Подъём корпуса с акцентом на ягодицы", muscle:"Спина"},
-        {name:"Отведение ноги", desc:"Изолированная работа ягодиц", muscle:"Ягодицы"},
-        {name:"Пульсации", desc:"Мелкие движения в нижней точке", muscle:"Ягодицы"}
-    ]
-},
-{
-    title: "Ягодицы",
-    premium: true,
-    exercises: [
-        {name:"Хип-траст", desc:"Таз поднимается с опорой на скамью", muscle:"Ягодицы"},
-        {name:"Ягодичный мост", desc:"Лёжа, подъем таза вверх", muscle:"Ягодицы"},
-        {name:"Румынская тяга", desc:"Наклон с прямой спиной", muscle:"Ягодицы"},
-        {name:"Болгарские выпады", desc:"Глубокая проработка одной ноги", muscle:"Ягодицы"},
-        {name:"Отведение ноги", desc:"Работа средней ягодичной", muscle:"Ягодицы"},
-        {name:"Разведение ног", desc:"Тренажёр на абдукцию", muscle:"Ягодицы"},
-        {name:"Шаги на платформу", desc:"Подъём на платформу", muscle:"Ягодицы"},
-        {name:"Жим ногами узко", desc:"Акцент на ягодицы", muscle:"Ягодицы"},
-        {name:"Пульсации", desc:"Микродвижения в напряжении", muscle:"Ягодицы"},
-        {name:"Статический мост", desc:"Удержание таза", muscle:"Ягодицы"}
-    ]
-},
-{
-    title: "Пресс",
-    premium: false,
-    exercises: [
-        {name:"Скручивания", desc:"Подъём корпуса", muscle:"Пресс"},
-        {name:"Подъем ног", desc:"Работа нижнего пресса", muscle:"Пресс"},
-        {name:"Русский твист", desc:"Повороты корпуса", muscle:"Косые"},
-        {name:"Планка", desc:"Статика корпуса", muscle:"Кор"},
-        {name:"Боковая планка", desc:"Удержание на боку", muscle:"Косые"},
-        {name:"V-ups", desc:"Одновременный подъём рук и ног", muscle:"Пресс"},
-        {name:"Ножницы", desc:"Перекрёстные движения ног", muscle:"Пресс"},
-        {name:"Альпинист", desc:"Кардио + пресс", muscle:"Пресс"},
-        {name:"Обратные скручивания", desc:"Подъём таза", muscle:"Нижний пресс"},
-        {name:"Планка с касанием", desc:"Касание плеч поочерёдно", muscle:"Кор"}
-    ]
-},
-{
-    title: "Руки и плечи",
-    premium: true,
-    exercises: [
-        {name:"Отжимания", desc:"Контроль корпуса", muscle:"Грудь"},
-        {name:"Жим гантелей", desc:"Толчок вверх", muscle:"Плечи"},
-        {name:"Бицепс подъём", desc:"Сгибание рук", muscle:"Бицепс"},
-        {name:"Французский жим", desc:"Трицепс", muscle:"Трицепс"},
-        {name:"Разведение гантелей", desc:"Работа плеч", muscle:"Плечи"},
-        {name:"Тяга гантелей", desc:"Спина", muscle:"Спина"},
-        {name:"Молотки", desc:"Бицепс", muscle:"Бицепс"},
-        {name:"Тяга блока", desc:"Спина", muscle:"Спина"},
-        {name:"Разгибание рук", desc:"Трицепс", muscle:"Трицепс"},
-        {name:"Отжимания узкие", desc:"Трицепс", muscle:"Трицепс"}
-    ]
-}
-];
-
-/* RENDER */
-function renderWorkouts(){
-    let container = document.getElementById("workouts");
-    container.innerHTML = "";
-
-    workouts.forEach(w => {
-
-        let card = document.createElement("div");
-        card.className = "card";
-
-        let html = `<h3>${w.title} ${w.premium ? "🔒" : ""}</h3>`;
-
-        if(w.premium && userLevel !== "advanced"){
-            html += `<p>Доступно только для Advanced уровня</p>`;
-        } else {
-
-            html += `<div class="details" style="display:block;">`;
-
-            w.exercises.forEach(ex => {
-                html += `
-                    <div style="margin-bottom:10px;">
-                        <strong>${ex.name}</strong><br>
-                        <small>${ex.desc}</small><br>
-                        <small>Мышцы: ${ex.muscle}</small>
-                    </div>
-                `;
-            });
-
-            html += `</div>`;
+document.querySelectorAll('.exercise').forEach(el=>{
+    el.addEventListener('click', ()=>{
+        let details = el.querySelector('.details');
+        if(details){
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
         }
-
-        card.innerHTML = html;
-        container.appendChild(card);
     });
-}
-
-/* NAV */
-function showWorkouts(){
-    alert("Already on workouts tab");
-}
-
-/* INIT */
-window.onload = () => {
-    let saved = localStorage.getItem("level");
-
-    if(saved){
-        setLevel(saved);
-    }
-};
-
+});
 </script>
 
 </body>
