@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>База трансформации</title>
+<title>Base Transformation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -11,25 +12,39 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: #0b0b0b;
+    background: #0a0a0a;
     color: #fff;
+    overflow: hidden;
+}
+
+/* КОНТЕЙНЕР СТРАНИЦ */
+.book {
+    display: flex;
+    width: 600%;
+    height: 100vh;
+    transition: transform 0.8s ease;
+}
+
+/* СТРАНИЦА */
+.page {
+    width: 100vw;
+    height: 100vh;
+    padding: 60px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* ОБЛОЖКА */
 .cover {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle at top, #1f1f1f, #000);
     text-align: center;
+    background: radial-gradient(circle, #1a1a1a, #000);
 }
 
 .cover h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 64px;
-    margin: 0;
+    font-size: 60px;
     background: linear-gradient(90deg, #fff, #777);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -37,130 +52,154 @@ body {
 
 .cover p {
     color: #aaa;
-    margin-top: 20px;
 }
 
-/* СТРАНИЦЫ */
-.page {
-    max-width: 800px;
-    margin: auto;
-    padding: 80px 20px;
-}
-
+/* КОНТЕНТ */
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
 }
 
 .step {
-    margin-bottom: 40px;
-    padding: 25px;
-    border-radius: 14px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
 }
 
-.step h3 {
-    margin-top: 0;
+.exercise {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 14px;
 }
 
-.step p {
-    color: #ccc;
-}
-
-/* ФОРМУЛА */
-.formula {
+/* НАВИГАЦИЯ */
+.nav {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
     text-align: center;
-    font-size: 20px;
-    margin: 60px 0;
-    opacity: 0.9;
 }
 
-/* ЦИТАТА */
-.quote {
-    text-align: center;
-    font-style: italic;
-    color: #999;
-    margin-top: 60px;
-}
-
-/* КНОПКА */
-.cta {
-    text-align: center;
-    margin-top: 80px;
-}
-
-.cta button {
-    padding: 15px 35px;
-    border-radius: 40px;
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 30px;
     border: none;
-    background: linear-gradient(135deg, #00ffcc, #00cc99);
-    color: #000;
     cursor: pointer;
-    font-size: 16px;
+    background: #00ffcc;
+    color: #000;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ОБЛОЖКА -->
-<section class="cover">
-    <h1>База трансформации</h1>
-    <p>Мини-гайд, который меняет внутреннюю систему</p>
-</section>
+<div class="book" id="book">
 
-<!-- КОНТЕНТ -->
-<section class="page">
+    <!-- ОБЛОЖКА -->
+    <section class="page cover">
+        <h1>Base Transformation</h1>
+        <p>Практический гайд внутренней трансформации</p>
+    </section>
 
-    <h2>С чего начинается трансформация</h2>
+    <!-- СТРАНИЦА 1 -->
+    <section class="page">
+        <h2>01 — Осознание</h2>
+        <div class="step">
+            Фиксация мыслей и реальности без искажений
+            <div class="exercise">
+                • Запиши 10 мыслей за день<br>
+                • Найди повторяющиеся сценарии
+            </div>
+        </div>
+    </section>
 
-    <div class="step">
-        <h3>01 — Осознание</h3>
-        <p>Ты фиксируешь факты, мысли и повторяющиеся сценарии без искажений.</p>
-    </div>
+    <!-- СТРАНИЦА 2 -->
+    <section class="page">
+        <h2>02 — Отделение</h2>
+        <div class="step">
+            Мысли ≠ факты
+            <div class="exercise">
+                • Спрашивай: это факт или интерпретация?<br>
+                • Замедляй реакцию
+            </div>
+        </div>
+    </section>
 
-    <div class="step">
-        <h3>02 — Отделение</h3>
-        <p>Ты перестаёшь верить каждой мысли и выходишь из автоматического режима.</p>
-    </div>
+    <!-- СТРАНИЦА 3 -->
+    <section class="page">
+        <h2>03 — Сценарий</h2>
+        <div class="step">
+            Найди базовую установку
+            <div class="exercise">
+                • Что я думаю о себе?<br>
+                • Какая мысль повторяется?
+            </div>
+        </div>
+    </section>
 
-    <div class="step">
-        <h3>03 — Сценарий</h3>
-        <p>Ты находишь установку, которая управляет твоими решениями.</p>
-    </div>
+    <!-- СТРАНИЦА 4 -->
+    <section class="page">
+        <h2>04 — Выбор</h2>
+        <div class="step">
+            Создай новую идентичность
+            <div class="exercise">
+                • Кем я выбираю быть?<br>
+                • Как действует эта версия меня?
+            </div>
+        </div>
+    </section>
 
-    <div class="step">
-        <h3>04 — Выбор</h3>
-        <p>Ты формируешь новую внутреннюю опору и идентичность.</p>
-    </div>
+    <!-- СТРАНИЦА 5 -->
+    <section class="page">
+        <h2>05–06 — Действие и закрепление</h2>
+        <div class="step">
+            Подтверждение через практику
+            <div class="exercise">
+                • Сделай 1 действие<br>
+                • Повтори 3 дня<br>
+                • Фиксируй результат
+            </div>
+        </div>
+    </section>
 
-    <div class="step">
-        <h3>05 — Действие</h3>
-        <p>Ты начинаешь делать маленькие действия, подтверждающие изменения.</p>
-    </div>
+    <!-- ФИНАЛ -->
+    <section class="page cover">
+        <h1>Формула</h1>
+        <p>Осознание → Выбор → Действие → Новая реальность</p>
+    </section>
 
-    <div class="step">
-        <h3>06 — Закрепление</h3>
-        <p>Ты фиксируешь прогресс и усиливаешь новые паттерны.</p>
-    </div>
+</div>
 
-    <div class="formula">
-        Осознание → Отделение → Сценарий → Выбор → Действие → Закрепление
-    </div>
+<div class="nav">
+    <button onclick="prev()">←</button>
+    <button onclick="next()">→</button>
+</div>
 
-    <div class="quote">
-        «Ты меняешь жизнь не тогда, когда хочешь изменений,  
-        а когда перестаёшь жить автоматически»
-    </div>
+<script>
+let current = 0;
+const book = document.getElementById("book");
+const total = 6;
 
-    <div class="cta">
-        <button onclick="alert('Ты уже в процессе трансформации')">
-            Начать
-        </button>
-    </div>
+function update() {
+    book.style.transform = "translateX(-" + current * 100 + "vw)";
+}
 
-</section>
+function next() {
+    if (current < total - 1) {
+        current++;
+        update();
+    }
+}
+
+function prev() {
+    if (current > 0) {
+        current--;
+        update();
+    }
+}
+</script>
 
 </body>
 </html>
