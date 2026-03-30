@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitness App</title>
+<title>Программа на неделю</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -16,36 +15,44 @@ body {
     color: #fff;
 }
 
-/* NAV */
-.nav {
-    display: flex;
-    justify-content: space-around;
-    padding: 15px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 40px 20px 10px;
 }
 
-.nav button {
-    background: none;
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+}
+
+/* DAYS NAV */
+.days {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 15px;
+}
+
+.days button {
+    flex: 0 0 auto;
+    background: rgba(255,255,255,0.05);
     border: none;
     color: #aaa;
-    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
-.nav button.active {
+.days button.active {
     color: #fff;
+    background: rgba(255,255,255,0.15);
 }
 
-/* SECTIONS */
+/* CONTENT */
 .section {
     display: none;
-    padding: 80px 20px 100px;
-    max-width: 900px;
-    margin: auto;
+    padding: 20px;
     animation: fadeIn 0.4s ease;
 }
 
@@ -54,7 +61,7 @@ body {
 }
 
 @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(15px);}
+    from {opacity: 0; transform: translateY(10px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
@@ -90,20 +97,8 @@ body {
     color: #bbb;
 }
 
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 60px 20px 20px;
-}
-
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-}
-
-/* CHECKBOX */
 .done {
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 </style>
@@ -111,119 +106,51 @@ body {
 
 <body>
 
-<div class="hero">
-    <h1>Фитнес-система Валерии Зайцевой</h1>
-    <p>Мастер спорта • восстановление • сила • эстетика</p>
+<div class="header">
+    <h1>Программа тренировок</h1>
+    <p>Неделя: баланс тела, сила и эстетика</p>
 </div>
 
-<!-- HOME -->
-<div id="home" class="section active">
-    <div class="block">
-        <h2>Добро пожаловать</h2>
-        <p>Выбери раздел внизу, чтобы начать тренировку.</p>
-    </div>
+<!-- DAYS -->
+<div class="days">
+    <button class="active" onclick="showDay('mon')">Пн</button>
+    <button onclick="showDay('tue')">Вт</button>
+    <button onclick="showDay('wed')">Ср</button>
+    <button onclick="showDay('thu')">Чт</button>
+    <button onclick="showDay('fri')">Пт</button>
+    <button onclick="showDay('sat')">Сб</button>
+    <button onclick="showDay('sun')">Вс</button>
 </div>
 
-<!-- TRAININGS -->
-<div id="trainings" class="section">
-
+<!-- MONDAY -->
+<div id="mon" class="section active">
     <div class="block">
-        <h2>🔥 Круговая тренировка</h2>
-
-        <div class="exercise">Берпи
-            <div class="details">
-                4 подхода × 15 повторений
-                <div class="done"><input type="checkbox"> Выполнено</div>
-            </div>
-        </div>
-
-        <div class="exercise">Присед + жим
-            <div class="details">4×12–15</div>
-        </div>
-
-        <div class="exercise">Планка
-            <div class="details">3×60 сек</div>
-        </div>
-
-    </div>
-
-    <div class="block">
-        <h2>🏋️ Ноги</h2>
+        <h2>🔥 Ноги + ягодицы</h2>
 
         <div class="exercise">Приседания
-            <div class="details">4×10–12</div>
+            <div class="details">4×12</div>
         </div>
 
         <div class="exercise">Ягодичный мост
-            <div class="details">4×12–15</div>
+            <div class="details">4×15</div>
         </div>
 
         <div class="exercise">Болгарские выпады
-            <div class="details">4×10 на ногу</div>
+            <div class="details">3×10 на ногу</div>
         </div>
 
         <div class="exercise">Румынская тяга
-            <div class="details">4×10–12</div>
+            <div class="details">4×10</div>
         </div>
-
     </div>
+</div>
 
+<!-- TUESDAY -->
+<div id="tue" class="section">
     <div class="block">
         <h2>💪 Верх тела</h2>
 
         <div class="exercise">Тяга верхнего блока
-            <div class="details">4×10–12</div>
-        </div>
-
-        <div class="exercise">Бабочка
-            <div class="details">4×12–15</div>
-        </div>
-
-        <div class="exercise">Жим гантелей
-            <div class="details">4×10–12</div>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ABS -->
-<div id="abs" class="section">
-
-    <div class="block">
-        <h2>🔥 Пресс</h2>
-
-        <div class="exercise">Скручивания
-            <div class="details">4×15</div>
-        </div>
-
-        <div class="exercise">Подъем ног
-            <div class="details">4×15</div>
-        </div>
-
-        <div class="exercise">Велосипед
-            <div class="details">4×20</div>
-        </div>
-
-        <div class="exercise">Планка
-            <div class="details">3×60 сек</div>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- FULL BODY -->
-<div id="full" class="section">
-
-    <div class="block">
-        <h2>⚡ Full Body</h2>
-
-        <div class="exercise">Тяга блока
-            <div class="details">4×12</div>
-        </div>
-
-        <div class="exercise">Присед
             <div class="details">4×12</div>
         </div>
 
@@ -231,37 +158,135 @@ body {
             <div class="details">4×10</div>
         </div>
 
-        <div class="exercise">Выпады
+        <div class="exercise">Разведения гантелей
+            <div class="details">3×12</div>
+        </div>
+
+        <div class="exercise">Трицепс канат
+            <div class="details">3×12</div>
+        </div>
+    </div>
+</div>
+
+<!-- WEDNESDAY -->
+<div id="wed" class="section">
+    <div class="block">
+        <h2>🧘 Восстановление + осанка</h2>
+
+        <div class="exercise">Йога
+            <div class="details">15–30 минут</div>
+        </div>
+
+        <div class="exercise">Растяжка
+            <div class="details">10–15 минут</div>
+        </div>
+
+        <div class="exercise">Прогулка
+            <div class="details">6000–10000 шагов</div>
+        </div>
+    </div>
+</div>
+
+<!-- THURSDAY -->
+<div id="thu" class="section">
+    <div class="block">
+        <h2>🔥 Ягодицы (интенсив)</h2>
+
+        <div class="exercise">Хип трест
+            <div class="details">5×10</div>
+        </div>
+
+        <div class="exercise">Отведение ноги
+            <div class="details">4×15</div>
+        </div>
+
+        <div class="exercise">Гиперэкстензия
             <div class="details">4×12</div>
+        </div>
+
+        <div class="exercise">Frog pumps
+            <div class="details">3×20</div>
+        </div>
+    </div>
+</div>
+
+<!-- FRIDAY -->
+<div id="fri" class="section">
+    <div class="block">
+        <h2>⚡ Full Body</h2>
+
+        <div class="exercise">Присед
+            <div class="details">4×12</div>
+        </div>
+
+        <div class="exercise">Тяга блока
+            <div class="details">4×12</div>
+        </div>
+
+        <div class="exercise">Жим гантелей
+            <div class="details">4×10</div>
         </div>
 
         <div class="exercise">Берпи
             <div class="details">3×15</div>
         </div>
-
     </div>
-
 </div>
 
-<!-- NAV -->
-<div class="nav">
-    <button onclick="showSection('home')" class="active">Главная</button>
-    <button onclick="showSection('trainings')">Тренировки</button>
-    <button onclick="showSection('abs')">Пресс</button>
-    <button onclick="showSection('full')">Full Body</button>
+<!-- SATURDAY -->
+<div id="sat" class="section">
+    <div class="block">
+        <h2>🔥 HIIT</h2>
+
+        <div class="exercise">Берпи
+            <div class="details">30 сек</div>
+        </div>
+
+        <div class="exercise">Mountain climbers
+            <div class="details">30 сек</div>
+        </div>
+
+        <div class="exercise">Прыжки
+            <div class="details">30 сек</div>
+        </div>
+
+        <div class="exercise">Отдых
+            <div class="details">15 сек × 5–6 кругов</div>
+        </div>
+    </div>
+</div>
+
+<!-- SUNDAY -->
+<div id="sun" class="section">
+    <div class="block">
+        <h2>🌿 Восстановление</h2>
+
+        <div class="exercise">Прогулка
+            <div class="details">Лёгкая активность</div>
+        </div>
+
+        <div class="exercise">Растяжка
+            <div class="details">10–20 минут</div>
+        </div>
+
+        <div class="exercise">Рефлексия
+            <div class="details">Что получилось за неделю</div>
+        </div>
+    </div>
 </div>
 
 <script>
 
-// navigation
-function showSection(id){
+// переключение дней
+function showDay(id){
     document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
 
-    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.days button').forEach(b=>b.classList.remove('active'));
+    event.target.classList.add('active');
 }
 
-// toggle exercises
+// раскрытие упражнений
 document.querySelectorAll('.exercise').forEach(el=>{
     el.addEventListener('click', ()=>{
         let d = el.querySelector('.details');
