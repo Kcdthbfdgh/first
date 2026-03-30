@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness App</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0b0b0b;
+    color: #fff;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.exercise {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.03);
+}
+
+.exercise label {
+    cursor: pointer;
+}
+
+.muscle {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.progress {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Fitness App</h2>
+    <p>Авторская система тренировок</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h3>Выбери тренировку</h3>
+        <button onclick="loadWorkout('circuit')">Круговая</button>
+        <button onclick="loadWorkout('legs')">Ноги</button>
+        <button onclick="loadWorkout('arms')">Руки</button>
+        <button onclick="loadWorkout('abs1')">Пресс 1</button>
+        <button onclick="loadWorkout('abs2')">Пресс 2</button>
+        <button onclick="loadWorkout('full')">Смешанная</button>
+    </div>
+
+    <div id="workout" class="card hidden">
+        <h3 id="title"></h3>
+        <div id="list"></div>
+        <div class="progress" id="progress"></div>
+        <button onclick="resetProgress()">Сбросить прогресс</button>
+    </div>
+
+</div>
+
+<script>
+
+const workouts = {
+    circuit: {
+        title: "Круговая тренировка",
+        exercises: [
+            "Берпи",
+            "Приседания с выпрыгиванием",
+            "Пресс книжка",
+            "Планка с весом",
+            "Стульчик",
+            "Прыжки",
+            "Mountain climbers",
+            "Скалолаз",
+            "Планка боковая",
+            "Прыжки в приседе"
+        ]
+    },
+    legs: {
+        title: "Ноги",
+        exercises: [
+            "Выпады в Смите",
+            "Приседания со штангой",
+            "Тяга вниз",
+            "Ягодичный мостик",
+            "Обратный жук",
+            "Болгарские выпады",
+            "Жим платформы одной ногой"
+        ]
+    },
+    arms: {
+        title: "Руки",
+        exercises: [
+            "Подтягивания",
+            "Жим гантелей вверх",
+            "Сгибания рук",
+            "Французский жим",
+            "Разведения в стороны",
+            "Тяга блока"
+        ]
+    },
+    abs1: {
+        title: "Пресс 1",
+        exercises: [
+            "Скручивания",
+            "Подъем ног",
+            "Планка",
+            "Русские скрутки"
+        ]
+    },
+    abs2: {
+        title: "Пресс 2",
+        exercises: [
+            "Велосипед",
+            "Планка с касанием плеч",
+            "Ножницы",
+            "Скручивания с удержанием"
+        ]
+    },
+    full: {
+        title: "Смешанная",
+        exercises: [
+            "Приседания",
+            "Отжимания",
+            "Тяга гантели",
+            "Планка",
+            "Выпады",
+            "Берпи"
+        ]
+    }
+};
+
+let currentWorkout = null;
+
+function loadWorkout(key){
+    currentWorkout = key;
+    const data = workouts[key];
+
+    document.getElementById("workout").classList.remove("hidden");
+    document.getElementById("title").innerText = data.title;
+
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    data.exercises.forEach((ex, index)=>{
+        const id = key + "_" + index;
+
+        const div = document.createElement("div");
+        div.className = "exercise";
+
+        div.innerHTML = `
+            <label>
+                <input type="checkbox" id="${id}" onchange="saveProgress()">
+                ${ex}
+            </label>
+        `;
+
+        list.appendChild(div);
+    });
+
+    loadProgress();
+    updateProgress();
+}
+
+function saveProgress(){
+    if(!currentWorkout) return;
+
+    const data = workouts[currentWorkout];
+    let progress = {};
+
+    data.exercises.forEach((_, index)=>{
+        const id = currentWorkout + "_" + index;
+        progress[id] = document.getElementById(id).checked;
+    });
+
+    localStorage.setItem(currentWorkout, JSON.stringify(progress));
+    updateProgress();
+}
+
+function loadProgress(){
+    if(!currentWorkout) return;
+
+    const saved = JSON.parse(localStorage.getItem(currentWorkout) || "{}");
+
+    Object.keys(saved).forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.checked = saved[id];
+    });
+}
+
+function updateProgress(){
+    if(!currentWorkout) return;
+
+    const data = workouts[currentWorkout];
+    let done = 0;
+
+    data.exercises.forEach((_, index)=>{
+        const id = currentWorkout + "_" + index;
+        const el = document.getElementById(id);
+        if(el && el.checked) done++;
+    });
+
+    document.getElementById("progress").innerText =
+        `Прогресс: ${done} / ${data.exercises.length}`;
+}
+
+function resetProgress(){
+    if(!currentWorkout) return;
+    localStorage.removeItem(currentWorkout);
+    loadWorkout(currentWorkout);
+}
+
+</script>
+
+</body>
+</html>
