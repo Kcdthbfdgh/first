@@ -1,3 +1,11 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Premium App</title>
+
 <style>
 body {
     margin: 0;
@@ -6,59 +14,57 @@ body {
     color: #fff;
 }
 
-/* Glass card */
+/* Screens */
+.screen {
+    display: none;
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+}
+.active { display: block; }
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(20px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+/* Cards */
 .card {
     background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
     border-radius: 16px;
     padding: 16px;
-    margin: 12px;
+    margin: 12px 0;
+    backdrop-filter: blur(10px);
     transition: 0.3s;
-    box-shadow: 0 0 20px rgba(255,255,255,0.05);
 }
 
 .card:hover {
-    transform: translateY(-5px) scale(1.01);
+    transform: translateY(-4px);
     background: rgba(255,255,255,0.08);
 }
 
 /* Buttons */
 button {
-    width: 90%;
-    margin: 10px auto;
+    width: 100%;
+    margin: 8px 0;
     padding: 14px;
-    border-radius: 12px;
     border: none;
+    border-radius: 12px;
     background: linear-gradient(135deg, #6c5ce7, #a29bfe);
     color: white;
     font-size: 15px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-button:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
-
-/* Screens */
-.screen {
+/* Details */
+.details {
     display: none;
-    padding: 20px;
-    animation: fadeIn 0.5s ease;
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.85;
 }
 
-.active {
-    display: block;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* Bottom nav */
+/* Nav */
 .nav {
     position: fixed;
     bottom: 0;
@@ -66,7 +72,7 @@ button:hover {
     right: 0;
     display: flex;
     justify-content: space-around;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     padding: 10px;
     backdrop-filter: blur(10px);
 }
@@ -77,207 +83,198 @@ button:hover {
     font-size: 18px;
 }
 
-/* Inputs */
-input[type="checkbox"] {
-    margin-right: 10px;
+/* Premium badge */
+.badge {
+    font-size: 12px;
+    opacity: 0.7;
 }
 </style>
-<div class="nav">
-    <button onclick="showTab('home')">🏠</button>
-    <button onclick="showTab('workouts')">💪</button>
-    <button onclick="showTab('progress')">📊</button>
+</head>
+
+<body>
+
+<!-- ONBOARDING -->
+<div id="onboarding" class="screen active">
+    <h2>Выбери уровень</h2>
+    <button onclick="setLevel('beginner')">Начальный</button>
+    <button onclick="setLevel('intermediate')">Средний</button>
+    <button onclick="setLevel('advanced')">Продвинутый</button>
 </div>
-<div id="homeTab" class="screen active">
+
+<!-- APP -->
+<div id="app" class="screen">
+
     <div class="card">
-        <h2>Главная</h2>
+        <h3>Твоя программа</h3>
         <p id="userInfo"></p>
+        <span class="badge">Premium Fitness System</span>
     </div>
+
+    <div id="workouts"></div>
+
 </div>
 
-<div id="workoutsTab" class="screen">
-    <div id="workoutsList"></div>
+<!-- NAV -->
+<div class="nav">
+    <button onclick="showWorkouts()">🏠</button>
+    <button onclick="alert('Premium feature: progress tracking')">📊</button>
+    <button onclick="alert('Premium feature: profile')">👤</button>
 </div>
 
-<div id="progressTab" class="screen">
-    <div class="card">
-        <h2>Прогресс</h2>
-        <p id="progressStats"></p>
-    </div>
-</div>
-function showTab(tab){
+<script>
 
-    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+/* USER DATA */
+let userLevel = null;
 
-    if(tab === "home") document.getElementById("homeTab").classList.add("active");
-    if(tab === "workouts") document.getElementById("workoutsTab").classList.add("active");
-    if(tab === "progress") document.getElementById("progressTab").classList.add("active");
+/* LEVEL */
+function setLevel(level){
+    userLevel = level;
+    localStorage.setItem("level", level);
+
+    document.getElementById("onboarding").classList.remove("active");
+    document.getElementById("app").classList.add("active");
+
+    document.getElementById("userInfo").innerText =
+        "Уровень: " + level;
+
+    renderWorkouts();
 }
+
+/* WORKOUT DATA */
 const workouts = [
-  {
+{
     title: "Круговая тренировка",
+    premium: false,
     exercises: [
-      { name: "Берпи", sets: "3x12", muscle: "Кардио, всё тело" },
-      { name: "Приседания с выпрыгиванием", sets: "3x15", muscle: "Ноги, ягодицы" },
-      { name: "Пресс книжка", sets: "3x20", muscle: "Пресс" },
-      { name: "Планка", sets: "3x60 сек", muscle: "Кор" },
-      { name: "Стульчик", sets: "3x60 сек", muscle: "Квадрицепсы" },
-      { name: "Альпинист", sets: "3x30", muscle: "Кардио, пресс" },
-      { name: "Jumping jacks", sets: "3x40", muscle: "Кардио" },
-      { name: "Скручивания", sets: "3x20", muscle: "Пресс" },
-      { name: "Отжимания", sets: "3x12", muscle: "Грудь, трицепс" },
-      { name: "Бег на месте", sets: "3x1 мин", muscle: "Кардио" }
+        {name:"Берпи", desc:"Сначала присед → прыжок → упор лёжа → отжимание → возврат", muscle:"Кардио, всё тело"},
+        {name:"Приседания с прыжком", desc:"Присед + взрывной прыжок вверх", muscle:"Ноги, ягодицы"},
+        {name:"Пресс книжка", desc:"Подъём корпуса и ног одновременно", muscle:"Пресс"},
+        {name:"Планка", desc:"Держи корпус ровно, без прогиба", muscle:"Кор"},
+        {name:"Стульчик", desc:"Статическое удержание у стены", muscle:"Квадрицепсы"},
+        {name:"Альпинист", desc:"Поочерёдное подтягивание коленей в планке", muscle:"Пресс"},
+        {name:"Jumping jacks", desc:"Прыжки с разведением рук и ног", muscle:"Кардио"},
+        {name:"Скручивания", desc:"Подъём плеч к тазу", muscle:"Пресс"},
+        {name:"Отжимания", desc:"Опускание корпуса до угла 90°", muscle:"Грудь"},
+        {name:"Бег на месте", desc:"Активный бег с высоким темпом", muscle:"Кардио"}
     ]
-  },
-
-  {
-    title: "Ноги (силовая)",
+},
+{
+    title: "Ноги",
+    premium: true,
     exercises: [
-      { name: "Приседания со штангой", sets: "4x12", muscle: "Квадрицепсы, ягодицы" },
-      { name: "Выпады в смите", sets: "4x15/нога", muscle: "Ягодицы, ноги" },
-      { name: "Жим ногами", sets: "4x12", muscle: "Ноги" },
-      { name: "Ягодичный мост", sets: "4x15", muscle: "Ягодицы" },
-      { name: "Болгарские выпады", sets: "3x12/нога", muscle: "Ягодицы, баланс" },
-      { name: "Разгибание ног", sets: "3x15", muscle: "Квадрицепсы" },
-      { name: "Сгибание ног", sets: "3x15", muscle: "Бицепс бедра" },
-      { name: "Отведение ноги", sets: "3x20", muscle: "Ягодицы" },
-      { name: "Гиперэкстензия", sets: "3x15", muscle: "Спина, ягодицы" },
-      { name: "Пульсации в приседе", sets: "3x30 сек", muscle: "Ягодицы" }
+        {name:"Приседания", desc:"Спина прямая, колени не выходят за носки", muscle:"Ноги"},
+        {name:"Выпады", desc:"Шаг вперёд и опускание корпуса", muscle:"Ягодицы"},
+        {name:"Жим ногами", desc:"Толчок платформы ногами", muscle:"Ноги"},
+        {name:"Ягодичный мост", desc:"Подъём таза вверх", muscle:"Ягодицы"},
+        {name:"Болгарские выпады", desc:"Задняя нога на возвышении", muscle:"Ягодицы"},
+        {name:"Разгибание ног", desc:"Работа квадрицепса", muscle:"Квадрицепсы"},
+        {name:"Сгибание ног", desc:"Работа задней поверхности бедра", muscle:"Бицепс бедра"},
+        {name:"Гиперэкстензия", desc:"Подъём корпуса с акцентом на ягодицы", muscle:"Спина"},
+        {name:"Отведение ноги", desc:"Изолированная работа ягодиц", muscle:"Ягодицы"},
+        {name:"Пульсации", desc:"Мелкие движения в нижней точке", muscle:"Ягодицы"}
     ]
-  },
-
-  {
-    title: "Ягодицы (акцент)",
+},
+{
+    title: "Ягодицы",
+    premium: true,
     exercises: [
-      { name: "Хип-траст", sets: "4x12", muscle: "Ягодицы" },
-      { name: "Ягодичный мост", sets: "4x15", muscle: "Ягодицы" },
-      { name: "Отведение ноги в кроссовере", sets: "3x15", muscle: "Ягодицы" },
-      { name: "Болгарские выпады", sets: "3x12", muscle: "Ягодицы" },
-      { name: "Румынская тяга", sets: "4x10", muscle: "Бицепс бедра, ягодицы" },
-      { name: "Жим ногами (узко)", sets: "4x12", muscle: "Ягодицы" },
-      { name: "Шаги на платформу", sets: "3x12", muscle: "Ягодицы" },
-      { name: "Разведение ног", sets: "3x20", muscle: "Средняя ягодичная" },
-      { name: "Пульсации мост", sets: "3x30", muscle: "Ягодицы" },
-      { name: "Статический мост", sets: "3x45 сек", muscle: "Ягодицы" }
+        {name:"Хип-траст", desc:"Таз поднимается с опорой на скамью", muscle:"Ягодицы"},
+        {name:"Ягодичный мост", desc:"Лёжа, подъем таза вверх", muscle:"Ягодицы"},
+        {name:"Румынская тяга", desc:"Наклон с прямой спиной", muscle:"Ягодицы"},
+        {name:"Болгарские выпады", desc:"Глубокая проработка одной ноги", muscle:"Ягодицы"},
+        {name:"Отведение ноги", desc:"Работа средней ягодичной", muscle:"Ягодицы"},
+        {name:"Разведение ног", desc:"Тренажёр на абдукцию", muscle:"Ягодицы"},
+        {name:"Шаги на платформу", desc:"Подъём на платформу", muscle:"Ягодицы"},
+        {name:"Жим ногами узко", desc:"Акцент на ягодицы", muscle:"Ягодицы"},
+        {name:"Пульсации", desc:"Микродвижения в напряжении", muscle:"Ягодицы"},
+        {name:"Статический мост", desc:"Удержание таза", muscle:"Ягодицы"}
     ]
-  },
-
-  {
+},
+{
     title: "Пресс",
+    premium: false,
     exercises: [
-      { name: "Скручивания", sets: "4x20", muscle: "Пресс" },
-      { name: "Подъем ног", sets: "4x15", muscle: "Нижний пресс" },
-      { name: "Русский твист", sets: "3x30", muscle: "Косые" },
-      { name: "Планка", sets: "3x60 сек", muscle: "Кор" },
-      { name: "Боковая планка", sets: "3x45 сек", muscle: "Косые" },
-      { name: "V-ups", sets: "3x15", muscle: "Пресс" },
-      { name: "Ножницы", sets: "3x30 сек", muscle: "Пресс" },
-      { name: "Альпинист", sets: "3x30", muscle: "Кардио + пресс" },
-      { name: "Обратные скручивания", sets: "3x15", muscle: "Нижний пресс" },
-      { name: "Планка с касанием плеч", sets: "3x20", muscle: "Кор" }
+        {name:"Скручивания", desc:"Подъём корпуса", muscle:"Пресс"},
+        {name:"Подъем ног", desc:"Работа нижнего пресса", muscle:"Пресс"},
+        {name:"Русский твист", desc:"Повороты корпуса", muscle:"Косые"},
+        {name:"Планка", desc:"Статика корпуса", muscle:"Кор"},
+        {name:"Боковая планка", desc:"Удержание на боку", muscle:"Косые"},
+        {name:"V-ups", desc:"Одновременный подъём рук и ног", muscle:"Пресс"},
+        {name:"Ножницы", desc:"Перекрёстные движения ног", muscle:"Пресс"},
+        {name:"Альпинист", desc:"Кардио + пресс", muscle:"Пресс"},
+        {name:"Обратные скручивания", desc:"Подъём таза", muscle:"Нижний пресс"},
+        {name:"Планка с касанием", desc:"Касание плеч поочерёдно", muscle:"Кор"}
     ]
-  },
-
-  {
+},
+{
     title: "Руки и плечи",
+    premium: true,
     exercises: [
-      { name: "Отжимания", sets: "3x12", muscle: "Грудь, трицепс" },
-      { name: "Жим гантелей вверх", sets: "4x10", muscle: "Плечи" },
-      { name: "Подъем гантелей на бицепс", sets: "3x12", muscle: "Бицепс" },
-      { name: "Французский жим", sets: "3x12", muscle: "Трицепс" },
-      { name: "Разведение гантелей", sets: "3x12", muscle: "Плечи" },
-      { name: "Тяга гантелей", sets: "3x12", muscle: "Спина" },
-      { name: "Молотки", sets: "3x12", muscle: "Бицепс" },
-      { name: "Тяга верхнего блока", sets: "4x10", muscle: "Спина" },
-      { name: "Разгибание рук", sets: "3x15", muscle: "Трицепс" },
-      { name: "Отжимания узкие", sets: "3x10", muscle: "Трицепс" }
+        {name:"Отжимания", desc:"Контроль корпуса", muscle:"Грудь"},
+        {name:"Жим гантелей", desc:"Толчок вверх", muscle:"Плечи"},
+        {name:"Бицепс подъём", desc:"Сгибание рук", muscle:"Бицепс"},
+        {name:"Французский жим", desc:"Трицепс", muscle:"Трицепс"},
+        {name:"Разведение гантелей", desc:"Работа плеч", muscle:"Плечи"},
+        {name:"Тяга гантелей", desc:"Спина", muscle:"Спина"},
+        {name:"Молотки", desc:"Бицепс", muscle:"Бицепс"},
+        {name:"Тяга блока", desc:"Спина", muscle:"Спина"},
+        {name:"Разгибание рук", desc:"Трицепс", muscle:"Трицепс"},
+        {name:"Отжимания узкие", desc:"Трицепс", muscle:"Трицепс"}
     ]
-  },
-
-  {
-    title: "Спина",
-    exercises: [
-      { name: "Тяга верхнего блока", sets: "4x12", muscle: "Спина" },
-      { name: "Тяга штанги", sets: "4x10", muscle: "Спина" },
-      { name: "Гиперэкстензия", sets: "3x15", muscle: "Поясница" },
-      { name: "Тяга гантели", sets: "3x12", muscle: "Спина" },
-      { name: "Подтягивания", sets: "3x макс", muscle: "Спина" },
-      { name: "Тяга горизонтального блока", sets: "4x12", muscle: "Спина" },
-      { name: "Разведение в наклоне", sets: "3x15", muscle: "Задняя дельта" },
-      { name: "Пуловер", sets: "3x12", muscle: "Грудь/спина" },
-      { name: "Шраги", sets: "3x15", muscle: "Трапеции" },
-      { name: "Тяга в тренажёре", sets: "3x12", muscle: "Спина" }
-    ]
-  },
-
-  {
-    title: "HIIT жиросжигание",
-    exercises: [
-      { name: "Берпи", sets: "4x12", muscle: "Кардио" },
-      { name: "Спринт на месте", sets: "4x30 сек", muscle: "Кардио" },
-      { name: "Jump squat", sets: "4x15", muscle: "Ноги" },
-      { name: "Альпинист", sets: "4x40", muscle: "Пресс" },
-      { name: "Прыжки на скакалке", sets: "4x1 мин", muscle: "Кардио" },
-      { name: "Планка", sets: "3x60 сек", muscle: "Кор" },
-      { name: "Mountain climbers", sets: "4x30", muscle: "Кардио" },
-      { name: "Выпрыгивания", sets: "3x15", muscle: "Ноги" },
-      { name: "Быстрые шаги", sets: "4x45 сек", muscle: "Кардио" },
-      { name: "Скручивания", sets: "3x20", muscle: "Пресс" }
-    ]
-  }
+}
 ];
-function renderWorkouts(){
 
-    let container = document.getElementById("workoutsList");
+/* RENDER */
+function renderWorkouts(){
+    let container = document.getElementById("workouts");
     container.innerHTML = "";
 
-    weeklyProgram.forEach(day => {
+    workouts.forEach(w => {
 
         let card = document.createElement("div");
         card.className = "card";
 
-        let html = `<h3>${day.day}</h3><p>${day.type}</p>`;
+        let html = `<h3>${w.title} ${w.premium ? "🔒" : ""}</h3>`;
 
-        day.exercises.forEach(ex => {
-            html += `
-                <label>
-                    <input type="checkbox" onchange="updateProgress()">
-                    ${ex}
-                </label><br>
-            `;
-        });
+        if(w.premium && userLevel !== "advanced"){
+            html += `<p>Доступно только для Advanced уровня</p>`;
+        } else {
+
+            html += `<div class="details" style="display:block;">`;
+
+            w.exercises.forEach(ex => {
+                html += `
+                    <div style="margin-bottom:10px;">
+                        <strong>${ex.name}</strong><br>
+                        <small>${ex.desc}</small><br>
+                        <small>Мышцы: ${ex.muscle}</small>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+        }
 
         card.innerHTML = html;
         container.appendChild(card);
     });
 }
-let progress = {
-    streak: 0
-};
 
-function updateProgress(){
-
-    let checkboxes = document.querySelectorAll("input[type='checkbox']");
-    let total = checkboxes.length;
-    let done = 0;
-
-    checkboxes.forEach(cb => {
-        if(cb.checked) done++;
-    });
-
-    let percent = total ? Math.round((done/total)*100) : 0;
-
-    document.getElementById("progressStats").innerText =
-        `Выполнено: ${percent}%`;
-}
-function initUser(){
-    let level = localStorage.getItem("level");
-    let goal = localStorage.getItem("goal");
-
-    document.getElementById("userInfo").innerText =
-        "Уровень: " + level + " | Цель: " + goal;
+/* NAV */
+function showWorkouts(){
+    alert("Already on workouts tab");
 }
 
+/* INIT */
 window.onload = () => {
-    renderWorkouts();
-    initUser();
+    let saved = localStorage.getItem("level");
+
+    if(saved){
+        setLevel(saved);
+    }
 };
+
+</script>
+
+</body>
+</html>
