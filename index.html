@@ -3,299 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Программа на неделю</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Fitness System</title>
 
 <style>
+<script src="app.js"></script>
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
-    color: #fff;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+    color: white;
 }
 
-/* HEADER */
-.header {
-    text-align: center;
-    padding: 40px 20px 10px;
-}
-
-.header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-}
-
-/* DAYS NAV */
-.days {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 10px 15px;
-}
-
-.days button {
-    flex: 0 0 auto;
-    background: rgba(255,255,255,0.05);
-    border: none;
-    color: #aaa;
-    padding: 10px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.days button.active {
-    color: #fff;
-    background: rgba(255,255,255,0.15);
-}
-
-/* CONTENT */
-.section {
+/* Screens */
+.screen {
     display: none;
     padding: 20px;
-    animation: fadeIn 0.4s ease;
+    text-align: center;
 }
 
-.section.active {
+.active {
     display: block;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* BLOCK */
-.block {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* EXERCISE */
-.exercise {
-    padding: 12px;
-    margin-top: 10px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 10px;
+/* Buttons */
+button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #6c5ce7;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
-.exercise:hover {
-    transform: scale(1.02);
-    background: rgba(255,255,255,0.08);
+button:hover {
+    transform: scale(1.05);
+    background: #a29bfe;
 }
 
+/* Cards */
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Hidden content */
 .details {
     display: none;
-    margin-top: 8px;
-    font-size: 13px;
-    color: #bbb;
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.8;
 }
 
-.done {
-    margin-top: 6px;
+/* Header */
+.header {
+    font-size: 18px;
+    margin-bottom: 20px;
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>Программа тренировок</h1>
-    <p>Неделя: баланс тела, сила и эстетика</p>
+<!-- ONBOARDING: LEVEL -->
+<div id="testScreen" class="screen active">
+    <h1>Выбери уровень</h1>
+    <button onclick="setLevel('beginner')">Начальный</button>
+    <button onclick="setLevel('intermediate')">Средний</button>
+    <button onclick="setLevel('advanced')">Продвинутый</button>
 </div>
 
-<!-- DAYS -->
-<div class="days">
-    <button class="active" onclick="showDay('mon')">Пн</button>
-    <button onclick="showDay('tue')">Вт</button>
-    <button onclick="showDay('wed')">Ср</button>
-    <button onclick="showDay('thu')">Чт</button>
-    <button onclick="showDay('fri')">Пт</button>
-    <button onclick="showDay('sat')">Сб</button>
-    <button onclick="showDay('sun')">Вс</button>
+<!-- ONBOARDING: GOAL -->
+<div id="goalScreen" class="screen">
+    <h1>Твоя цель</h1>
+    <button onclick="setGoal('glutes')">🍑 Ягодицы</button>
+    <button onclick="setGoal('fatloss')">🔥 Похудение</button>
+    <button onclick="setGoal('tone')">✨ Тонус</button>
 </div>
 
-<!-- MONDAY -->
-<div id="mon" class="section active">
-    <div class="block">
-        <h2>🔥 Ноги + ягодицы</h2>
+<!-- APP -->
+<div id="appScreen" class="screen">
+    <div class="card">
+    <strong>Прогресс</strong>
+    <p id="progressText">0% выполнено</p>
+    <button onclick="resetProgress()">Сбросить день</button>
+    </div>
+    <div class="header" id="levelBadge"></div>
 
-        <div class="exercise">Приседания
-            <div class="details">4×12</div>
-        </div>
+    <h2>Тренировки</h2>
 
-        <div class="exercise">Ягодичный мост
-            <div class="details">4×15</div>
-        </div>
+    <div class="card">
+    <strong>Круговая тренировка</strong>
 
-        <div class="exercise">Болгарские выпады
-            <div class="details">3×10 на ногу</div>
-        </div>
-
-        <div class="exercise">Румынская тяга
-            <div class="details">4×10</div>
-        </div>
+    <div class="details" style="display:block;">
+        <label><input type="checkbox" onchange="updateProgress()"> Берпи</label><br>
+        <label><input type="checkbox" onchange="updateProgress()"> Приседания с выпрыгиванием</label><br>
+        <label><input type="checkbox" onchange="updateProgress()"> Пресс книжка</label><br>
+        <label><input type="checkbox" onchange="updateProgress()"> Планка</label><br>
+        <label><input type="checkbox" onchange="updateProgress()"> Стульчик</label><br>
     </div>
 </div>
-
-<!-- TUESDAY -->
-<div id="tue" class="section">
-    <div class="block">
-        <h2>💪 Верх тела</h2>
-
-        <div class="exercise">Тяга верхнего блока
-            <div class="details">4×12</div>
-        </div>
-
-        <div class="exercise">Жим гантелей
-            <div class="details">4×10</div>
-        </div>
-
-        <div class="exercise">Разведения гантелей
-            <div class="details">3×12</div>
-        </div>
-
-        <div class="exercise">Трицепс канат
-            <div class="details">3×12</div>
+    <div class="card" onclick="toggleDetails(this)">
+        <strong>Силовая тренировка ног</strong>
+        <div class="details">
+            <p>1. Выпады в смите</p>
+            <p>2. Приседания</p>
+            <p>3. Тяга вниз</p>
+            <p>4. Ягодичный мост</p>
+            <p>5. Болгарские выпады</p>
         </div>
     </div>
-</div>
 
-<!-- WEDNESDAY -->
-<div id="wed" class="section">
-    <div class="block">
-        <h2>🧘 Восстановление + осанка</h2>
-
-        <div class="exercise">Йога
-            <div class="details">15–30 минут</div>
-        </div>
-
-        <div class="exercise">Растяжка
-            <div class="details">10–15 минут</div>
-        </div>
-
-        <div class="exercise">Прогулка
-            <div class="details">6000–10000 шагов</div>
-        </div>
-    </div>
-</div>
-
-<!-- THURSDAY -->
-<div id="thu" class="section">
-    <div class="block">
-        <h2>🔥 Ягодицы (интенсив)</h2>
-
-        <div class="exercise">Хип трест
-            <div class="details">5×10</div>
-        </div>
-
-        <div class="exercise">Отведение ноги
-            <div class="details">4×15</div>
-        </div>
-
-        <div class="exercise">Гиперэкстензия
-            <div class="details">4×12</div>
-        </div>
-
-        <div class="exercise">Frog pumps
-            <div class="details">3×20</div>
-        </div>
-    </div>
-</div>
-
-<!-- FRIDAY -->
-<div id="fri" class="section">
-    <div class="block">
-        <h2>⚡ Full Body</h2>
-
-        <div class="exercise">Присед
-            <div class="details">4×12</div>
-        </div>
-
-        <div class="exercise">Тяга блока
-            <div class="details">4×12</div>
-        </div>
-
-        <div class="exercise">Жим гантелей
-            <div class="details">4×10</div>
-        </div>
-
-        <div class="exercise">Берпи
-            <div class="details">3×15</div>
-        </div>
-    </div>
-</div>
-
-<!-- SATURDAY -->
-<div id="sat" class="section">
-    <div class="block">
-        <h2>🔥 HIIT</h2>
-
-        <div class="exercise">Берпи
-            <div class="details">30 сек</div>
-        </div>
-
-        <div class="exercise">Mountain climbers
-            <div class="details">30 сек</div>
-        </div>
-
-        <div class="exercise">Прыжки
-            <div class="details">30 сек</div>
-        </div>
-
-        <div class="exercise">Отдых
-            <div class="details">15 сек × 5–6 кругов</div>
-        </div>
-    </div>
-</div>
-
-<!-- SUNDAY -->
-<div id="sun" class="section">
-    <div class="block">
-        <h2>🌿 Восстановление</h2>
-
-        <div class="exercise">Прогулка
-            <div class="details">Лёгкая активность</div>
-        </div>
-
-        <div class="exercise">Растяжка
-            <div class="details">10–20 минут</div>
-        </div>
-
-        <div class="exercise">Рефлексия
-            <div class="details">Что получилось за неделю</div>
-        </div>
-    </div>
 </div>
 
 <script>
+let userLevel = null;
+let userGoal = null;
 
-// переключение дней
-function showDay(id){
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+/* LEVEL */
+function setLevel(level){
+    userLevel = level;
+    localStorage.setItem("level", level);
 
-    document.querySelectorAll('.days button').forEach(b=>b.classList.remove('active'));
-    event.target.classList.add('active');
+    document.getElementById("testScreen").classList.remove("active");
+    document.getElementById("goalScreen").classList.add("active");
 }
 
-// раскрытие упражнений
-document.querySelectorAll('.exercise').forEach(el=>{
-    el.addEventListener('click', ()=>{
-        let d = el.querySelector('.details');
-        if(d){
-            d.style.display = d.style.display === 'block' ? 'none' : 'block';
-        }
-    });
-});
+/* GOAL */
+function setGoal(goal){
+    userGoal = goal;
+    localStorage.setItem("goal", goal);
 
+    document.getElementById("goalScreen").classList.remove("active");
+    document.getElementById("appScreen").classList.add("active");
+
+    document.getElementById("levelBadge").innerText =
+        "Уровень: " + userLevel + " | Цель: " + userGoal;
+}
+
+/* TOGGLE DETAILS */
+function toggleDetails(card){
+    let details = card.querySelector(".details");
+    details.style.display = details.style.display === "block" ? "none" : "block";
+}
+
+/* AUTO LOAD */
+window.onload = () => {
+    let savedLevel = localStorage.getItem("level");
+    let savedGoal = localStorage.getItem("goal");
+
+    if(savedLevel && savedGoal){
+        userLevel = savedLevel;
+        userGoal = savedGoal;
+
+        document.getElementById("testScreen").classList.remove("active");
+        document.getElementById("goalScreen").classList.remove("active");
+        document.getElementById("appScreen").classList.add("active");
+
+        document.getElementById("levelBadge").innerText =
+            "Уровень: " + savedLevel + " | Цель: " + savedGoal;
+    }
+};
 </script>
 
 </body>
